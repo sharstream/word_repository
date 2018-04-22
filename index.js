@@ -15,16 +15,21 @@ let startGuessing = () => {
             message: "Guess a letter!",
             choices: words,
             validate: function (value) {
-                if (value.test(regex)) {
+                if (!value.test(regex)) {
                     return true;
                 }
                 return false;
             }
         }
     ]).then(function (answers) {
-
+        let compare = '';
         let word = new Word(answers.character);
         word.addLetter(answers.character, true);
+
+        if (answers.words.length > -1) {
+            compare = answers.words[Math.floor(Math.random() * words.length)];
+        }
+
         // when concatenating with a string, JavaScript automatically calls `toString`
         console.log(word + '');
         word.guessed = true;
@@ -39,3 +44,5 @@ let startGuessing = () => {
         }
     });
 };
+
+startGuessing();

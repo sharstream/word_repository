@@ -18,37 +18,24 @@ function Word(
 
         return result.toLowerCase();
     };
-    this.chooseWord = () => {
-        if (this.letterCount > -1) {
-            return letters[Math.floor(Math.random() * this.letterCount)];
-        }
-    };
-    this.letterCount = function () {
-        return this.letters.length;
-    };
+    this.takeLetter = (character) => {
+        return Letter.letterChecked(character);
+    }
 };
 
 // test
-let l1 = new Letter('h', true);
-let l2 = new Letter('e', true);
-let l3 = new Letter('a', true);
-let l4 = new Letter('r', true);
-let l5 = new Letter('t', true);
-let l6 = new Letter('h', true);
 let word = new Word();
-word.addLetter(l1);
-word.addLetter(l2);
-word.addLetter(l3);
-word.addLetter(l4);
-word.addLetter(l5);
-word.addLetter(l6);
-// word.letters.forEach((element) => {
-//     console.log(element.toString());
-// });
+word.addLetter('h', true);
+word.addLetter('e', true);
+word.addLetter('a', true);
+word.addLetter('r', true);
+word.addLetter('t', true);
+word.addLetter('h', true);
+word.letters.forEach((element) => {
+    console.log(element.toString());
+});
 console.log(word.letters.join(' '));
-// console.log(word.letterCount());
 // console.log(word.gameShownAnswer());
-// console.log(word.letterCount());
 // end test
 
 module.exports = Word;
