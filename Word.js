@@ -9,7 +9,7 @@ function Word(
     this.addLetter = (character,guessed) => {
         this.letters.push(new Letter(character, guessed));
     };
-    this.gameShownAnswer = (answerWord) => {
+    this.gameShownWord = (answerWord) => {
         let result = '';
 
         for (i in answerWord) {
@@ -18,9 +18,21 @@ function Word(
 
         return result.toLowerCase();
     };
-    this.takeLetter = (character) => {
-        return Letter.letterChecked(character);
-    }
+    this.alterAt = (n, originalString) => {
+        return originalString.substr(0, n) + this.character + originalString.substr(n + 1, originalString.length);
+    };
+    this.guessLetter = (letter, shown, answer) => {
+        var checkIndex = 0;
+
+        checkIndex = answer.indexOf(letter);
+        console.log(answer.indexOf(letter));
+        while (checkIndex >= 0) {
+            shown = alterAt(checkIndex, letter, shown);
+            console.log(answer.indexOf(letter, checkIndex + 1));
+            checkIndex = answer.indexOf(letter, checkIndex + 1);
+        }
+        return shown;
+    };
 };
 
 // test
@@ -35,7 +47,7 @@ word.letters.forEach((element) => {
     console.log(element.toString());
 });
 console.log(word.letters.join(' '));
-// console.log(word.gameShownAnswer());
+// console.log(word.gameShownWord());
 // end test
 
 module.exports = Word;

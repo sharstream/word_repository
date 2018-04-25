@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sharstream/word_repository#readme",
   "dependencies": {
+    "commander": "^2.15.1",
     "inquirer": "^5.2.0"
   }
 }
