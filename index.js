@@ -3,37 +3,52 @@
 let fs = require("fs");
 let inquirer = require("inquirer");
 let Word = require("./Word.js");
-let words = ['hearth', 'tree', 'mountain', 'bike', 'computer'];
+let words = ['hearth world', 'beautiful tree', 'mountain view', 'road bike', 'computer system'];
 let regex = new RegExp("/^[a-zA-Z\s]+$/");
+let remains = 0;
 
 let startGuessing = () => {
     // console.log("\nNEW LETTER!\n");
     inquirer.prompt([
         {
-            name: "character",
+            name: "words",
             type: "list",
             message: "Guess a letter!",
-            choices: words,
-            validate: (value) => {
-                return !regex.test(value) ? true : false;
-            }
+            choices: words
+        },
+        {
+            type: "input",
+            name: "letter",
+            message: "Enter a letter"
         }
     ]).then(function (answers) {
         let compare = '';
-        let word = new Word(answers.character);
-        word.addLetter(answers.character, true);
+        let word = new Word(answers['words']);
+        // console.log('words ' + word.word);
+        let answer_blanks = word.blankWords(word.word);
+        remains = word.word.length;
+        // console.log('remaining ' + remains);
         console.log(JSON.stringify(answers, null, ' '));
-        if (answers.words.length > -1) {
-            compare = answers.words[Math.floor(Math.random() * words.length)];
-        }
+        console.log('Word to be guessed: ' + answer_blanks);
+        let concatenation = answers['words'].split(' ');
+        console.log(concatenation);
+        concatenation.forEach( (item) => {
+            remains--;
+            if(item.includes(answers.letter)){
+                
+                console.log("CORRECT!!!");
+                console.log("Guess Letters " + word.guessLetter(answers.letter, compare));
+                
+            }
+            else {
+                console.log("INCORRECT!!!");
+            }
 
-        // when concatenating with a string, JavaScript automatically calls `toString`
-        console.log(word + '');
-        word.guessed = true;
+            console.log("Remaining " + remains);
+        });
 
         // the same thing happens if we call `join` on a letter array: 
         // JavaScript calls `toString` automatially on each word, then joins them together
-        console.log(word.letters.join(', '));
     }).catch(function(err){
         if (err) {
             throw err;
