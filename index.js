@@ -31,21 +31,24 @@ let startGuessing = () => {
         console.log(JSON.stringify(answers, null, ' '));
         console.log('Word to be guessed: ' + answer_blanks);
         let concatenation = answers['words'].split(' ');
+        let index = 0;
         console.log(concatenation);
-        concatenation.forEach( (item) => {
+        // concatenation.forEach( (item) => {
+        while ((index === answers['words'].indexOf(' ', index + 1)) > 0){
             remains--;
-            if(item.includes(answers.letter)){
-                
+            if (item.includes(answers.letter)) {
+
                 console.log("CORRECT!!!");
                 console.log("Guess Letters " + word.guessLetter(answers.letter, compare));
-                
+
             }
             else {
                 console.log("INCORRECT!!!");
             }
-
-            console.log("Remaining " + remains);
-        });
+            index++;
+        }
+        
+        console.log("Remaining " + remains);
 
         // the same thing happens if we call `join` on a letter array: 
         // JavaScript calls `toString` automatially on each word, then joins them together

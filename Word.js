@@ -23,6 +23,7 @@ function Word(
         return originalString.substr(0, n) + this.character + originalString.substr(n + 1, originalString.length);
     };
     this.guessLetter = (letter, shown) => {
+        debugger
         var checkIndex = 0;
 
         checkIndex = this.word.indexOf(letter);
@@ -49,7 +50,9 @@ word.letters.forEach((element) => {
     console.log(element.toString());
 });
 console.log(word.letters.join(' '));
-console.log('blank' + word.blankWords(word.word));
+console.log('blank: ' + word.blankWords(word.word));
+let displayAnswer = '';
+console.log('display answers: ' + word.guessLetter('h', displayAnswer));
 // end test
 
 module.exports = Word;
