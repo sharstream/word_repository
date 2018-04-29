@@ -23,7 +23,7 @@ function Word(
         return originalString.substr(0, n) + this.character + originalString.substr(n + 1, originalString.length);
     };
     this.guessLetter = (letter, shown) => {
-        debugger
+        
         var checkIndex = 0;
 
         checkIndex = this.word.indexOf(letter);
