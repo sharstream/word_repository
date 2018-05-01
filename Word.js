@@ -14,7 +14,7 @@ function Word(
         let result = '';
 
         for (i in answerWord) {
-            result = "_" + result;
+            result = "_ " + result;
         }
 
         return result.toLowerCase();
@@ -27,10 +27,8 @@ function Word(
         var checkIndex = 0;
 
         checkIndex = this.word.indexOf(letter);
-        console.log(this.word.indexOf(letter));
         while (checkIndex >= 0) {
             shown = this.alterAt(checkIndex, letter, shown);
-            console.log(this.word.indexOf(letter, checkIndex + 1));
             checkIndex = this.word.indexOf(letter, checkIndex + 1);
             this.addLetter(letter, true);
         }

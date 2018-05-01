@@ -5,26 +5,32 @@ let inquirer = require("inquirer");
 let Word = require("./Word.js");
 let words = ['hearth world', 'beautiful tree', 'mountain view', 'road bike', 'computer system'];
 let regex = new RegExp("/^[a-zA-Z\s]+$/");
-let remains = 0;
 let word = new Word(words[Math.floor(Math.random() * words.length)]);
+let remains = word.word.length;;
+let gameShowAnswer = '';
 let startGuessing = () => {
-    let tempChar = '';
     var tempString = '';
-    let gameShowAnswer = '';
     console.log('The random word is: ' + word.word);
-    remains = word.word.length;
     inquirer
       .prompt([
       {
         name: "word",
         type: "input",
-        message: "Guess a letter!"
+        message: "Guess a letter!",
+        validate: (value) => {
+            if (!regex.test(value)) {
+                return true;
+            }
+            return false;
+        }
       }
       ]).then(function (answers) {
         tempString = word.guessLetter(answers.word, gameShowAnswer);
-        console.log('tempString: ' + tempString);
         if (tempString != gameShowAnswer) {
+            console.log(word.blankWords(word.word + '.'));
             console.log('CORRECT!');
+            updateWord(gameShowAnswer);
+            // console.log(gameShowAnswer);
             gameShowAnswer = tempString;
             if (gameShowAnswer === word.word) {
                 console.log('You got it right! Next word.');
@@ -33,6 +39,7 @@ let startGuessing = () => {
         else {
             console.log('INCORRECT!');
             remains--;
+            console.log(remains + ' guesses remaining!!!');
             if (remains === 0) {
                 console.log('You lose it! Next word.')
             }
@@ -46,3 +53,14 @@ let startGuessing = () => {
 };
 
 startGuessing();
+
+function updateWord(answer) {
+    for (i in answer) {
+        if (answer.charAt(i) != '_ ') {
+            console.log(answer.charAt(i));
+        } else {
+            console.log('_ ');
+        }
+        console.log(answer.charAt(i+1));
+    }
+}
