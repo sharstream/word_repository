@@ -12,6 +12,8 @@ Advance JS game with constructors
 4. Run `npm install` to install node dependencies.
 5. Run `node index.js` to start guessing letters.
 
+![image alternative text](https://i.imgur.com/0LhUvee.png)
+
 ## Usage
 ```
 Usage: index.js [options] [command]
