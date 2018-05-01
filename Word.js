@@ -6,9 +6,10 @@ function Word(
     word
 ) {
     this.word = word;
-    this.letters = [];
-    this.addLetter = (character,guessed) => {
-        this.letters.push(new Letter(character, guessed));
+    this.letters = '';
+    this.addLetter = (character) => {
+        let letter = new Letter(character);
+        this.letters += letter.toString();
     };
     this.blankWords = (answerWord) => {
         let result = '';
@@ -30,7 +31,7 @@ function Word(
         while (checkIndex >= 0) {
             shown = this.alterAt(checkIndex, letter, shown);
             checkIndex = this.word.indexOf(letter, checkIndex + 1);
-            this.addLetter(letter, true);
+            // this.addLetter(letter);
         }
         return shown;
     };

@@ -1,11 +1,10 @@
 //Letter constructor
 
 function Letter(
-    character,
-    guessed,
+    character
 ) {
     this.character = character;
-    this.guessed = guessed;
+    this.guessed = false;
     this.toString = () => {
         if (this.guessed) {
             return this.character.toLowerCase();

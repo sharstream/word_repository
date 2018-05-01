@@ -24,26 +24,34 @@ let startGuessing = () => {
             return false;
         }
       }
-      ]).then(function (answers) {
-        tempString = word.guessLetter(answers.word, gameShowAnswer);
-        if (tempString != gameShowAnswer) {
-            console.log(word.blankWords(word.word + '.'));
-            console.log('CORRECT!');
-            updateWord(gameShowAnswer);
-            // console.log(gameShowAnswer);
-            gameShowAnswer = tempString;
-            if (gameShowAnswer === word.word) {
-                console.log('You got it right! Next word.');
+      ]).then(function (answer) {
+        tempString = word.guessLetter(answer.word, gameShowAnswer);
+        console.log('letters: ' + word.letters);
+        if (word.letters.indexOf(answer.word) === -1) {
+            word.addLetter(answer.word);
+            if (tempString != gameShowAnswer) {
+                console.log(word.blankWords(word.word + '.'));
+                console.log('CORRECT!');
+                updateWord(gameShowAnswer);
+                console.log(gameShowAnswer);
+                gameShowAnswer = tempString;
+                if (gameShowAnswer === word.word) {
+                    console.log('You got it right! Next word.');
+                }
+            }
+            else {
+                console.log('INCORRECT!');
+                remains--;
+                console.log(remains + ' guesses remaining!!!');
+                if (remains === 0) {
+                    console.log('You lose it! Next word.')
+                }
             }
         }
         else {
-            console.log('INCORRECT!');
-            remains--;
-            console.log(remains + ' guesses remaining!!!');
-            if (remains === 0) {
-                console.log('You lose it! Next word.')
-            }
+            console.log('This letter was already choosen!!!');
         }
+        
         startGuessing();
       }).catch(function(err){
         if (err) {
