@@ -38,21 +38,4 @@ function Word(
     };
 };
 
-// test
-// let word = new Word('health world');
-// word.addLetter('h', true);
-// word.addLetter('e', true);
-// word.addLetter('a', true);
-// word.addLetter('r', true);
-// word.addLetter('t', true);
-// word.addLetter('h', true);
-// word.letters.forEach((element) => {
-//     console.log(element.toString());
-// });
-// console.log(word.letters.join(' '));
-// console.log('blank: ' + word.blankWords(word.word));
-// let displayAnswer = '';
-// console.log('display answers: ' + word.guessLetter('h', displayAnswer));
-// // end test
-
 module.exports = Word;

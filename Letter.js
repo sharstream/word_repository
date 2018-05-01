@@ -21,8 +21,4 @@ function Letter(
     };
 };
 
-// test
-// let letter = new Letter('a', false);
-// console.log(letter.toString());
-
 module.exports = Letter;
